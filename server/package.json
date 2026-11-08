@@ -1,0 +1,17 @@
+{
+  "name": "toolforge-server",
+  "version": "1.0.0",
+  "description": "Toolforge — a local web UI for your Python utility toolbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "PORT=7077 HOST=127.0.0.1 node index.js",
+    "host": "PORT=7077 HOST=0.0.0.0 node index.js"
+  },
+  "keywords": ["toolforge", "tools", "utilities"],
+  "author": "sword",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
