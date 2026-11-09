@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Technical SEO & Crawlability -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://toolforge.dev/" />
+
+  <!-- On-Page Primary Meta Tags -->
+  <title>Toolforge — Free Online Python Tools, PDF Converters & Utilities</title>
+  <meta name="title" content="Toolforge — Free Online Python Tools, PDF Converters & Utilities" />
+  <meta name="description" content="Access 35+ free, high-speed Python tools in one clean web console. Convert Word to PDF, extract YouTube transcripts, check crypto and stocks, generate QR codes, and run in-memory calculations without tracking." />
+  <meta name="keywords" content="python tools, free pdf converter, docx to pdf, youtube transcript generator, crypto price ticker, stock quote, qr code maker, file archiver, student utilities" />
+  <meta name="author" content="Toolforge" />
+
+  <!-- Open Graph / Facebook / LinkedIn Social Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolforge.dev/" />
+  <meta property="og:site_name" content="Toolforge" />
+  <meta property="og:title" content="Toolforge — 35+ Free Online Python Utilities & Converters" />
+  <meta property="og:description" content="Zero tracking, private in-memory execution. Fast document conversion, financial tickers, scientific calculators, and media utilities." />
+  <meta property="og:image" content="https://toolforge.dev/og-image.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Toolforge Free Online Python Utility Platform Banner" />
+
+  <!-- Twitter / X Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://toolforge.dev/" />
+  <meta name="twitter:title" content="Toolforge — Free Online Python Tools & Document Converters" />
+  <meta name="twitter:description" content="All-in-one free Python utility workspace. Convert Word to PDF, grab YouTube transcripts, check stocks, and more." />
+  <meta name="twitter:image" content="https://toolforge.dev/og-image.svg" />
+  <meta name="twitter:image:alt" content="Toolforge Free Python Utilities Dashboard" />
+
+  <!-- PWA & Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1120'/%3E%3Cpath d='M32 12l4.8 15.2L52 32l-15.2 4.8L32 52l-4.8-15.2L12 32l15.2-4.8z' fill='%238b9cff'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#080c14" />
+
+  <!-- High Performance Stylesheet -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- JSON-LD Structured Data: Organization & WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://toolforge.dev/#organization",
+        "name": "Toolforge",
+        "url": "https://toolforge.dev/",
+        "logo": "https://toolforge.dev/og-image.svg",
+        "sameAs": [
+          "https://github.com/BayazidHabibSiddikee"
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://toolforge.dev/#webapp",
+        "name": "Toolforge Online Python Toolbox",
+        "url": "https://toolforge.dev/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "A high-performance browser interface for running Python utilities, office document converters, crypto/stock lookups, and archive utilities without installation or fees.",
+        "featureList": [
+          "DOCX to PDF & PDF to DOCX Conversion",
+          "Real-time Crypto & Stock Market Lookups",
+          "YouTube Transcript Extractor & Multi-language Translation",
+          "Scientific & Programmer Base Calculators",
+          "QR Code Generator with High-Res Download",
+          "In-Memory Private Execution with Zero User Tracking"
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Icon Sprite Definitions -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true">
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.8-.6-.6-2.8 2-2.2z"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-calculator" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="19" rx="3"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 20v-6M11 20V8M16 20v-9M21 20V4"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.4 4 5.6 4 9s-1.5 6.6-4 9c-2.5-2.4-4-5.6-4-9s1.5-6.6 4-9z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/></symbol>
+    <symbol id="i-archive" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1.5"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></symbol>
+    <symbol id="i-vault" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="12" cy="12" r="4"/><path d="M12 8v1.5M12 14.5V16M8 12h1.5M14.5 12H16"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13 4l-2 16"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1M14 20h1M18 18h3v3h-3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5L5 20"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.3c-.6-.8-1.5-1.3-2.5-1.3-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2c-1 0-1.9-.5-2.5-1.3M12 6v2M12 16v2"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10M15 10v10"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 1 0-5.7-5.7L11.5 6"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 1 0 5.7 5.7L12.5 18"/></symbol>
+    <symbol id="i-translate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.4 4 5.6 4 9s-1.5 6.6-4 9c-2.5-2.4-4-5.6-4-9s1.5-6.6 4-9z"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M12.5 15H17"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12.5 5 5L20 6.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H4M10 6l-6 6 6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2 6.5"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5 14.6 9.4 21.5 12l-6.9 2.6L12 21.5 9.4 14.6 2.5 12l6.9-2.6z"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  </svg>
+
+  <div class="app">
+    <!-- ------------------------------------------------------------ sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+      <a class="brand" href="#/dashboard" aria-label="Toolforge Home">
+        <span class="brand-mark"><svg class="icon"><use href="#i-spark"/></svg></span>
+        <span class="brand-text">Toolforge<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary Navigation">
+        <a class="nav-item active" data-nav="dashboard" href="#/dashboard">
+          <svg class="icon"><use href="#i-dashboard"/></svg><span>Dashboard</span>
+        </a>
+        <a class="nav-item" data-nav="tools" href="#/tools">
+          <svg class="icon"><use href="#i-tools"/></svg><span>All Tools</span><span class="nav-count" id="navToolCount">39</span>
+        </a>
+        <a class="nav-item" data-nav="files" href="#/files">
+          <svg class="icon"><use href="#i-folder"/></svg><span>Files &amp; Artifacts</span>
+        </a>
+        <a class="nav-item" data-nav="history" href="#/history">
+          <svg class="icon"><use href="#i-clock"/></svg><span>Run History</span>
+        </a>
+      </nav>
+
+      <div class="side-section">
+        <span class="side-label">Categories</span>
+        <div class="category-nav" id="categoryNav"></div>
+      </div>
+
+      <div class="sidebar-foot">
+        <button class="btn primary compact w-full" id="tipBtn" style="margin-bottom: 12px; gap: 8px;">
+          <svg class="icon"><use href="#i-coffee"/></svg>
+          <span>Support Toolforge</span>
+        </button>
+        <div class="env-card" id="envCard">
+          <span class="pulse" id="envPulse"></span>
+          <div class="env-copy">
+            <strong id="envTitle">Live Engine</strong>
+            <span id="envMeta">Local &amp; Zero-Cost</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim" hidden></div>
+
+    <!-- ---------------------------------------------------------------- main -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Toggle mobile menu">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+        <nav class="crumbs" id="crumbs" aria-label="Breadcrumbs"></nav>
+        <div class="topbar-actions">
+          <button class="search-trigger" id="searchBtn" aria-label="Search tools with keyboard shortcut">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <span>Search utilities</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <button class="icon-btn" id="themeBtn" aria-label="Toggle dark/light theme">
+            <svg class="icon" id="themeIcon"><use href="#i-moon"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="scroll" id="scroll">
+        <!-- ------------------------------------------------------ dashboard -->
+        <section class="view" id="view-dashboard" aria-labelledby="dashTitle">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow"><span class="eyebrow-line"></span>HIGH-PERFORMANCE TOOLCHAIN · <span id="heroCount">39</span> UTILITIES</span>
+              <!-- Strict single H1 for On-Page SEO -->
+              <h1 id="dashTitle">Instant Python Utilities.<br /><span class="grad">Zero Cost. Zero Tracking.</span></h1>
+              <p class="hero-sub">The complete personal web toolkit: Convert Word to PDF, extract YouTube transcripts, pull stock quotes, generate QR codes, and run mathematical expressions with pure in-memory execution.</p>
+              <div class="hero-actions">
+                <a class="btn primary" href="#/tools">
+                  Explore All Utilities
+                  <svg class="icon"><use href="#i-arrow-right"/></svg>
+                </a>
+                <a class="btn ghost" href="#/tools?cat=documents">
+                  <svg class="icon"><use href="#i-file"/></svg>
+                  Document Tools
+                </a>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="hero-panel-head">
+                <span class="chip-live"><span class="pulse"></span>Online</span>
+                <span class="mono subtle" id="heroHost">127.0.0.1:7077</span>
+              </div>
+              <div class="gauge">
+                <div class="gauge-label"><span>Worker CPU Utilization</span><strong id="heroCpu">0%</strong></div>
+                <svg class="spark" viewBox="0 0 220 56" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity=".35"/>
+                      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="sparkLine" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="var(--accent2)"/>
+                      <stop offset="100%" stop-color="var(--accent)"/>
+                    </linearGradient>
+                  </defs>
+                  <path id="sparkArea" fill="url(#sparkFill)" d=""/>
+                  <polyline id="sparkLineEl" fill="none" stroke="url(#sparkLine)" stroke-width="2" points=""/>
+                </svg>
+                <div class="gauge-foot">
+                  <span class="mono" id="heroUptime">uptime --</span>
+                  <span class="mono" id="heroLoad">load --</span>
+                </div>
+              </div>
+              <div class="hero-panel-foot">
+                <div><span class="mini-label">MEMORY</span><strong id="heroMem">--</strong></div>
+                <div><span class="mini-label">DISK FREE</span><strong id="heroDisk">--</strong></div>
+                <div><span class="mini-label">NODE ENGINE</span><strong class="mono" id="heroNode">v26.x</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO Secondary Sections with strictly nested H2 tags -->
+          <div class="stat-row" id="statRow">
+            <article class="stat-card">
+              <span class="stat-icon tint-1"><svg class="icon"><use href="#i-tools"/></svg></span>
+              <div><span class="mini-label">TOTAL UTILITIES</span><strong id="statTools">39</strong></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon tint-2"><svg class="icon"><use href="#i-cpu"/></svg></span>
+              <div><span class="mini-label">ACTIVE LOAD</span><strong id="statCpu">0%</strong></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon tint-3"><svg class="icon"><use href="#i-table"/></svg></span>
+              <div><span class="mini-label">RAM USAGE</span><strong id="statMem">--</strong></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon tint-4"><svg class="icon"><use href="#i-spark"/></svg></span>
+              <div><span class="mini-label">AVG LATENCY</span><strong>&lt; 50ms</strong></div>
+            </article>
+          </div>
+
+          <div class="dash-grid">
+            <section class="dash-block">
+              <div class="block-head">
+                <div>
+                  <h2>Featured Utilities</h2>
+                  <p>Frequently accessed everyday essentials.</p>
+                </div>
+                <a class="text-link" href="#/tools">View catalog <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+              </div>
+              <div class="quick-grid" id="quickGrid"></div>
+            </section>
+
+            <section class="dash-block">
+              <div class="block-head">
+                <div>
+                  <h2>Recent Activity</h2>
+                  <p>In-memory audit log of current session operations.</p>
+                </div>
+                <a class="text-link" href="#/history">Full log <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+              </div>
+              <div class="activity-list" id="recentList"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ---------------------------------------------------------- tools -->
+        <section class="view" id="view-tools" hidden aria-labelledby="toolsTitle">
+          <div class="page-head">
+            <div>
+              <span class="eyebrow"><span class="eyebrow-line"></span>CURATED REPOSITORY</span>
+              <h2 id="toolsTitle">All Python Utilities</h2>
+              <p class="page-sub" id="toolsSub">Browse and launch any tool in your workspace with pre-configured schemas and instant outputs.</p>
+            </div>
+            <label class="field-search" for="toolSearch">
+              <svg class="icon"><use href="#i-search"/></svg>
+              <input type="search" id="toolSearch" placeholder="Filter by name, module, or keyword…" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="chip-row" id="categoryChips"></div>
+          <div class="tool-grid" id="toolGrid"></div>
+        </section>
+
+        <!-- ------------------------------------------------------------ run -->
+        <section class="view" id="view-run" hidden aria-labelledby="runTitle">
+          <a class="back-link" href="#/tools"><svg class="icon"><use href="#i-arrow-left"/></svg> Back to all tools</a>
+          <div class="run-head">
+            <span class="run-icon" id="runIcon"><svg class="icon"><use href="#i-spark"/></svg></span>
+            <div class="run-title-wrap">
+              <h2 id="runTitle">Utility Execution</h2>
+              <p id="runDesc"></p>
+              <div class="run-tags">
+                <span class="mono tag" id="runModule">module</span>
+                <span class="mono tag" id="runFunction">function</span>
+                <span class="tag" id="runCategory">category</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="run-grid">
+            <form class="panel run-form" id="runForm" novalidate>
+              <div class="panel-head">
+                <h3>Parameters</h3>
+                <button class="text-btn" type="reset" id="resetForm">Reset Defaults</button>
+              </div>
+              <div class="fields" id="runFields"></div>
+              <div class="form-actions">
+                <button class="btn primary run-btn" type="submit" id="runSubmit">
+                  <svg class="icon"><use href="#i-play"/></svg>
+                  <span>Run tool</span>
+                </button>
+                <span class="form-hint">Processes instantly via local bridge</span>
+              </div>
+            </form>
+
+            <div class="panel run-output">
+              <div class="panel-head">
+                <h3>Results &amp; Logs</h3>
+                <div class="output-tools">
+                  <span class="run-state" id="runState"><span class="dot"></span>Idle</span>
+                  <button class="icon-btn small" id="copyOutput" title="Copy JSON" disabled aria-label="Copy output">
+                    <svg class="icon"><use href="#i-copy"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="output-body" id="runOutput">
+                <div class="empty-state">
+                  <span class="empty-icon"><svg class="icon"><use href="#i-terminal"/></svg></span>
+                  <h4>Nothing run yet</h4>
+                  <p>Configure input parameters on the left and click <strong>Run tool</strong>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------------------------------------------------- files -->
+        <section class="view" id="view-files" hidden aria-labelledby="filesTitle">
+          <div class="page-head">
+            <div>
+              <span class="eyebrow"><span class="eyebrow-line"></span>ARTIFACTS</span>
+              <h2 id="filesTitle">Generated Files &amp; Workspace</h2>
+              <p class="page-sub">Direct access to converted documents, generated QR codes, and downloads.</p>
+            </div>
+            <div class="head-actions">
+              <div class="segmented" id="scopeTabs" role="tablist">
+                <button class="active" data-scope="workspace" role="tab">Workspace</button>
+                <button data-scope="downloads" role="tab">Downloads</button>
+              </div>
+              <button class="icon-btn" id="refreshFiles" title="Refresh files" aria-label="Refresh files">
+                <svg class="icon"><use href="#i-refresh"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="file-panel panel" id="filePanel"></div>
+        </section>
+
+        <!-- -------------------------------------------------------- history -->
+        <section class="view" id="view-history" hidden aria-labelledby="historyTitle">
+          <div class="page-head">
+            <div>
+              <span class="eyebrow"><span class="eyebrow-line"></span>AUDIT RECORD</span>
+              <h2 id="historyTitle">Session History</h2>
+              <p class="page-sub">Rolling execution history and latency telemetry for current session.</p>
+            </div>
+            <div class="head-actions">
+              <button class="btn ghost compact" id="clearHistory">
+                <svg class="icon"><use href="#i-trash"/></svg> Clear history
+              </button>
+            </div>
+          </div>
+          <div class="panel history-panel" id="historyPanel"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- --------------------------------------------------------- command palette -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-scrim" data-close-palette></div>
+    <div class="palette-box" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="palette-input">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="paletteInput" type="text" placeholder="Search any utility or section (e.g. PDF, Crypto, Calc)..." autocomplete="off" spellcheck="false" />
+        <kbd>ESC</kbd>
+      </div>
+      <div class="palette-results" id="paletteResults"></div>
+      <div class="palette-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+        <span><kbd>↵</kbd> select</span>
+        <span class="palette-brand"><svg class="icon"><use href="#i-spark"/></svg> Toolforge</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------ Support / Tip Modal -->
+  <div class="palette" id="supportModal" hidden>
+    <div class="palette-scrim modal-scrim"></div>
+    <div class="palette-box" role="dialog" aria-modal="true" aria-label="Support Toolforge" style="max-width: 480px; padding: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1.15rem;">
+          <svg class="icon" style="color: #f59e0b;"><use href="#i-coffee"/></svg>
+          Support Free Hosting
+        </h3>
+        <button class="icon-btn small modal-close" aria-label="Close modal"><svg class="icon"><use href="#i-x"/></svg></button>
+      </div>
+      <p style="color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px;">
+        Toolforge runs 100% free with zero paywalls. If these converters and Python utilities saved you time, consider fueling server uptime!
+      </p>
+
+      <a href="https://www.buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="btn primary w-full" style="justify-content: center; margin-bottom: 16px; background: #ffdd00; color: #000; font-weight: 600;">
+        <svg class="icon"><use href="#i-coffee"/></svg>
+        Buy Me a Coffee
+      </a>
+
+      <div style="padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Bitcoin (BTC) Tip Address</span>
+          <button class="text-btn small" id="copyBtcBtn" style="color: var(--accent);">Copy</button>
+        </div>
+        <code id="btcAddress" style="font-size: 0.78rem; word-break: break-all; color: var(--text);">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <!-- Interactive JavaScript Engine -->
+  <script src="/app.js"></script>
+</body>
+</html>
