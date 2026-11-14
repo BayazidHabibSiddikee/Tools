@@ -1,0 +1,41 @@
+# ============================================================
+# render.yaml — Infrastructure-as-Code for Render.com
+# Deploy: dashboard.render.com → New → "Render Blueprint"
+#         or just use the Web Service UI with Docker runtime.
+# ============================================================
+
+services:
+  # ── Main Gateway (Node.js + light tools) ──────────────────
+  - type: web
+    name: toolforge-gateway
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free         # 512 MB RAM / 0.1 CPU / free tier
+    healthCheckPath: /api/health
+
+    envVars:
+      - key: PORT
+        value: "7860"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: NODE_ENV
+        value: production
+      - key: TOOLFORGE_ROLE
+        value: gateway
+
+      # ── Set these in Render Dashboard → Environment ────────
+      # (never commit real values to git)
+      - key: HEAVY_WORKER_URL
+        sync: false     # paste your Koyeb URL here in the dashboard
+      - key: ORIGIN_SECRET
+        generateValue: true  # auto-generated shared secret
+      - key: SECRET_BINANCE_URI
+        sync: false     # your Binance affiliate link
+      - key: SECRET_BTC_ADDRESS
+        sync: false     # your Bitcoin wallet address
+      - key: FRONTEND_ORIGIN
+        value: "https://toolforge.dev"
+
+    # Auto-deploy on push to main
+    autoDeploy: true
+    branch: main

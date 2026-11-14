@@ -1,0 +1,50 @@
+# ============================================================
+# koyeb.yaml — Koyeb.com deployment config (reference)
+# Deploy via: app.koyeb.com → Create Web Service → GitHub → Dockerfile
+# Or use the Koyeb CLI: koyeb service create --name toolforge-worker ...
+# ============================================================
+
+# This is a reference config — Koyeb uses its own UI/CLI for setup.
+# Keep this file for documentation purposes.
+
+service:
+  name: toolforge-worker
+  type: web
+  instance_type: free    # 0.1 vCPU / 512 MB RAM
+  regions:
+    - was                # Washington DC (closest to Render US region)
+
+  git:
+    repository: github.com/BayazidHabibSiddikee/toolforge
+    branch: main
+    build_command: ""    # Uses Dockerfile
+
+  ports:
+    - port: 7860
+      protocol: http
+
+  environment_variables:
+    - name: PORT
+      value: "7860"
+    - name: HOST
+      value: "0.0.0.0"
+    - name: TOOLFORGE_ROLE
+      value: worker      # FastAPI heavy worker only
+    - name: FASTAPI_PORT
+      value: "7860"      # Koyeb exposes this port directly
+    - name: JOB_RAM_DIR
+      value: /tmp/sword_jobs
+    # Set in Koyeb dashboard (not committed):
+    # ORIGIN_SECRET = same value as Render's ORIGIN_SECRET
+
+  health_checks:
+    - path: /health
+      port: 7860
+      interval: 30
+      timeout: 10
+      healthy_threshold: 1
+      unhealthy_threshold: 3
+
+  scaling:
+    min: 1
+    max: 1   # Keep at 1 — free tier

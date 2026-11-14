@@ -1,62 +1,85 @@
 # ============================================================
-# Toolforge – HuggingFace Spaces Dockerfile
-# ============================================================
-# Base: python:3.12-slim  (official slim image, ~125 MB)
-# Node.js: 20.x LTS (via NodeSource)
-# Port: 7860 (HuggingFace default; maps to our PORT env var)
-#
-# Deploy steps:
-#   1. Push this repo to a HuggingFace Space (Docker SDK)
-#   2. HF builds this image automatically on each push
-#   3. Space runs the Node.js server on port 7860
-#   4. Set HOST=0.0.0.0 so HF can reach the container
+# Toolforge – 512 MB Dual-Cloud Dockerfile
+# Targets: Render.com (gateway) & Koyeb.com (heavy worker)
+# Base: python:3.11-slim-bookworm
+# Node.js: 20 LTS  |  Port: 7860 (Render/Koyeb/HF default)
 # ============================================================
 
-FROM python:3.12-slim
+FROM python:3.11-slim-bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    # Prevent Python malloc from hoarding fragmented arenas (saves ~30 MB idle)
+    MALLOC_ARENA_MAX=2 \
+    # Cap Node.js old-space so it never spikes past 128 MB on a 512 MB box
+    NODE_OPTIONS="--max-old-space-size=128" \
+    PORT=7860 \
+    HOST=0.0.0.0 \
+    # FastAPI sidecar running on the same container (gateway role only)
+    FASTAPI_URL=http://127.0.0.1:8000 \
+    # Heavy worker on Koyeb — set this env var on Render dashboard
+    # HEAVY_WORKER_URL=https://your-app.koyeb.app
+    # Use /tmp instead of /dev/shm (shm capped at 64 MB on free clouds)
+    JOB_RAM_DIR=/tmp/sword_jobs \
+    NODE_ENV=production
 
 # --- System packages ---
+# Strip X11/LibreOffice entirely; use pure-Python doc tools instead
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
     gnupg \
-    libmagic1 \
-    # For pypdf / pillow native deps
-    libgomp1 \
-    # For folium/matplotlib headless
+    # OCR (English + Bangla — heavy worker only; comment out on gateway)
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    tesseract-ocr-ben \
+    # Media processing — heavy worker only
+    ffmpeg \
+    yt-dlp \
+    # Archive tools
+    p7zip-full \
+    unzip \
+    # Pillow / OpenCV native deps
+    libgl1 \
     libglib2.0-0 \
-    libsm6 \
-    libxrender1 \
-    libxext6 \
-    && rm -rf /var/lib/apt/lists/*
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+       | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" \
+       > /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update && apt-get install -y --no-install-recommends nodejs \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# --- Node.js 20 LTS ---
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    rm -rf /var/lib/apt/lists/*
-
-# --- Python deps ---
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# --- Python deps (install before COPY . . for layer caching) ---
+COPY requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# --- Node deps ---
+COPY package.json ./
+RUN npm install --omit=dev --prefix /app/server 2>/dev/null || true && \
+    npm cache clean --force 2>/dev/null || true
 
 # --- App source ---
 COPY . .
+RUN chmod +x /app/start.sh 2>/dev/null || true
 
-# --- Expose HuggingFace default port ---
+# --- Create job temp dir ---
+RUN mkdir -p /tmp/sword_jobs && chmod 777 /tmp/sword_jobs
+
+# --- HF Space metadata (ignored by Render/Koyeb) ---
+# title: Toolforge
+# emoji: ⚡
+# sdk: docker
+# pinned: false
+
 EXPOSE 7860
 
-# --- Runtime environment ---
-ENV PORT=7860
-ENV HOST=0.0.0.0
-ENV NODE_ENV=production
-# Point app.js to self (relative) — no cross-origin needed when frontend
-# and backend are on the same HF Space container.
-# If you split Vercel (frontend) + HF (backend), set this in index.html:
-#   <script>window.TF_API_BASE = 'https://your-username-toolforge.hf.space'</script>
-
 # --- Health check ---
-HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD curl -f http://localhost:7860/api/health || exit 1
 
-# --- Start ---
-CMD ["node", "server/index.js"]
+CMD ["/app/start.sh"]

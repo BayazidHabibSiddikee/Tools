@@ -1,39 +1,56 @@
 # ============================================================
-# Keepalive — prevents HuggingFace Space from sleeping
+# Keepalive — prevents Render.com and Koyeb.com from sleeping
 # ============================================================
-# HuggingFace free-tier Spaces sleep after 48 hours of inactivity.
-# This workflow pings /api/health every 10 minutes to keep it warm.
+# Render free tier spins down after 15 min of inactivity.
+# Koyeb free tier also sleeps after inactivity.
+# This workflow pings both /health endpoints every 10 minutes.
 #
-# Setup:
-#   1. Add secret HF_SPACE_URL = https://your-username-toolforge.hf.space
-#      in GitHub repo → Settings → Secrets → Actions
-#   2. Enable the workflow (it's disabled by default to avoid charges)
+# Setup (GitHub repo → Settings → Secrets → Actions):
+#   RENDER_URL  = https://your-app.onrender.com
+#   KOYEB_URL   = https://your-app.koyeb.app
+#
+# Both secrets are optional — if unset, that ping step is skipped.
 # ============================================================
 
-name: 🏓 HuggingFace Space Keepalive
+name: 🏓 Dual-Cloud Keepalive (Render + Koyeb)
 
 on:
   schedule:
-    # Every 10 minutes
-    - cron: "*/10 * * * *"
-  workflow_dispatch: # Allow manual trigger
+    - cron: "*/10 * * * *"   # every 10 minutes
+  workflow_dispatch:           # manual trigger
 
 jobs:
-  ping:
-    name: Ping Space Health Endpoint
+  keepalive:
+    name: Ping health endpoints
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 3
 
     steps:
-      - name: Ping /api/health
+      - name: Ping Render gateway
+        if: ${{ secrets.RENDER_URL != '' }}
+        run: |
+          URL="${{ secrets.RENDER_URL }}/api/health"
+          echo "→ Render: $URL"
+          RESP=$(curl -sf --max-time 20 "$URL" || echo '{"ok":false}')
+          echo "   $RESP"
+          echo "$RESP" | grep -q '"ok":true' || echo "⚠️  Render not healthy (may be warming up)"
+
+      - name: Ping Koyeb worker
+        if: ${{ secrets.KOYEB_URL != '' }}
+        run: |
+          URL="${{ secrets.KOYEB_URL }}/health"
+          echo "→ Koyeb: $URL"
+          RESP=$(curl -sf --max-time 20 "$URL" || echo '{"ok":false}')
+          echo "   $RESP"
+          echo "$RESP" | grep -q '"ok":true' || echo "⚠️  Koyeb not healthy (may be warming up)"
+
+      # Legacy HuggingFace Space ping (kept for backward compat)
+      - name: Ping HuggingFace Space (optional)
+        if: ${{ secrets.HF_SPACE_URL != '' }}
         run: |
           URL="${{ secrets.HF_SPACE_URL }}/api/health"
-          echo "Pinging: $URL"
-          RESPONSE=$(curl -sf --max-time 15 "$URL" || echo '{"ok":false}')
-          echo "Response: $RESPONSE"
-          # Fail the step if ok is not true (alerts via GitHub email)
-          echo "$RESPONSE" | grep -q '"ok":true' || (echo "Space is not healthy!" && exit 1)
+          echo "→ HF Space: $URL"
+          curl -sf --max-time 20 "$URL" || echo "⚠️  HF Space not reachable"
 
-      - name: Log timestamp
-        if: always()
-        run: echo "Keepalive ran at $(date -u)"
+      - name: Done
+        run: echo "✅ Keepalive completed at $(date -u)"

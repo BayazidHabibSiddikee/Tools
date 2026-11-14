@@ -1,46 +1,62 @@
-# Toolforge Python dependencies
-# Generated for HuggingFace Spaces deployment (Python 3.12)
-# Stdlib modules excluded (json, os, re, sys, threading, asyncio, etc.)
+# Toolforge Python dependencies — 512 MB cloud-safe build
+# Tested on python:3.11-slim-bookworm (Render.com + Koyeb.com free tier)
+# stdlib modules excluded (json, os, re, sys, threading, asyncio, etc.)
+# LibreOffice removed — use pure-Python alternatives below
 
-# HTTP & Web
+# ── HTTP & Web ──────────────────────────────────────────────────────────────
 requests>=2.31.0
 httpx>=0.27.0
+
+# ── FastAPI worker (heavy worker on Koyeb) ──────────────────────────────────
 fastapi>=0.111.0
 uvicorn[standard]>=0.30.0
 
-# Data & Finance
+# ── Data & Finance ───────────────────────────────────────────────────────────
 yfinance>=0.2.40
 pandas>=2.2.0
 arrow>=1.3.0
 
-# Web Scraping & Search
+# ── Web Scraping & Search ────────────────────────────────────────────────────
 beautifulsoup4>=4.12.0
 duckduckgo-search>=6.1.0
-camoufox>=0.4.0
 
-# Documents & PDF
-pypdf>=4.3.0
+# ── Documents & PDF (pure-Python, no LibreOffice) ───────────────────────────
+# PyMuPDF: fast PDF read/write/extract (<35 MB RAM) — replaces soffice
+pymupdf>=1.24.0
+# pdf2docx: PDF → DOCX pure Python conversion
+pdf2docx>=0.5.8
+# python-docx: DOCX creation/editing
 python-docx>=1.1.2
+# pypdf: PDF merge/split/metadata
+pypdf>=4.3.0
+# openpyxl: Excel read/write
 openpyxl>=3.1.4
 
-# Images & QR
+# ── Images & QR ──────────────────────────────────────────────────────────────
 Pillow>=10.4.0
 qrcode[pil]>=7.4.2
+# Matplotlib headless
 matplotlib>=3.9.0
+# Cap image pixels to prevent OOM on 512 MB
+# (enforced in bridge.py: Image.MAX_IMAGE_PIXELS = 12_000_000)
+
+# ── Geolocation & Maps ───────────────────────────────────────────────────────
+geopy>=2.4.1
 folium>=0.17.0
 
-# Geolocation
-geopy>=2.4.1
+# ── OCR (Koyeb heavy worker — tesseract-ocr must be installed in Dockerfile) ─
+pytesseract>=0.3.13
 
-# Mapping / Visualization
-# folium already included above
+# ── AI / Translation ─────────────────────────────────────────────────────────
+# deep-translator: free, no API key needed for Google Translate
+deep-translator>=1.11.4
 
-# Audio (optional — may be skipped on HF Spaces if no audio device)
-# pygame>=2.6.0  # Uncomment only if audio features are needed
-
-# AI / LLM (optional — only if Marin/agent tools are exposed)
-# ollama>=0.2.1   # Uncomment if local Ollama bridge is used
-
-# Note: bpy (Blender Python), pywhatkit, pythonosc, tkinter, turtle
-# are NOT included — they require a GUI or native Blender install
-# and are not suitable for headless HuggingFace Spaces deployment.
+# ── Excluded (GUI / native only) ─────────────────────────────────────────────
+# bpy          — Blender Python API (requires Blender install)
+# pywhatkit    — requires display/browser
+# pygame       — requires audio device
+# tkinter      — stdlib but requires X11
+# turtle       — requires X11
+# pythonosc    — optional, only needed for VRM tools
+# ollama       — optional, only if local Ollama bridge is used
+# camoufox     — requires browser binary (too heavy for 512 MB)
