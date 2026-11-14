@@ -1,0 +1,39 @@
+# ============================================================
+# Keepalive — prevents HuggingFace Space from sleeping
+# ============================================================
+# HuggingFace free-tier Spaces sleep after 48 hours of inactivity.
+# This workflow pings /api/health every 10 minutes to keep it warm.
+#
+# Setup:
+#   1. Add secret HF_SPACE_URL = https://your-username-toolforge.hf.space
+#      in GitHub repo → Settings → Secrets → Actions
+#   2. Enable the workflow (it's disabled by default to avoid charges)
+# ============================================================
+
+name: 🏓 HuggingFace Space Keepalive
+
+on:
+  schedule:
+    # Every 10 minutes
+    - cron: "*/10 * * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    name: Ping Space Health Endpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Ping /api/health
+        run: |
+          URL="${{ secrets.HF_SPACE_URL }}/api/health"
+          echo "Pinging: $URL"
+          RESPONSE=$(curl -sf --max-time 15 "$URL" || echo '{"ok":false}')
+          echo "Response: $RESPONSE"
+          # Fail the step if ok is not true (alerts via GitHub email)
+          echo "$RESPONSE" | grep -q '"ok":true' || (echo "Space is not healthy!" && exit 1)
+
+      - name: Log timestamp
+        if: always()
+        run: echo "Keepalive ran at $(date -u)"

@@ -136,11 +136,23 @@
   }
 
   // ---------------------------------------------------------------------------
+  // API Base — works locally (relative) and on HuggingFace Spaces / Vercel
+  // Set window.TF_API_BASE = 'https://your-space.hf.space' via a <script> tag
+  // in index.html when deploying to production, or leave unset for local dev.
+  // ---------------------------------------------------------------------------
+  const API_BASE =
+    window.TF_API_BASE ||
+    (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+      ? ""
+      : "");
+
+  // ---------------------------------------------------------------------------
   // API Fetch Utilities
   // ---------------------------------------------------------------------------
   async function fetchJson(endpoint, options = {}) {
     try {
-      const res = await fetch(endpoint, options);
+      const res = await fetch(API_BASE + endpoint, options);
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.error || `HTTP ${res.status}`);
@@ -511,6 +523,9 @@
       });
 
       const elapsed = (performance.now() - startTime).toFixed(1);
+      // Stash last args for heroRepeat
+      STATE.history.unshift({ toolId: tool.id, args: { ...args } });
+      if (STATE.history.length > 50) STATE.history.pop();
       renderExecutionOutput(response, elapsed);
       showToast("Execution Complete", `${tool.title} finished in ${elapsed}ms`, response.ok ? "ok" : "err");
       loadHistory(true);
@@ -819,6 +834,31 @@
       loadHistory();
       showToast("History Cleared", "Local execution log removed.", "ok");
     }
+  });
+
+  // Hero Repeat — replay last tool execution
+  DOM.heroRepeat?.addEventListener("click", () => {
+    const last = STATE.history[0];
+    if (!last) {
+      showToast("No History", "Run a tool first.", "info");
+      return;
+    }
+    setRoute(`#/tool/${last.toolId}`);
+    // After route renders, pre-fill and re-submit
+    setTimeout(() => {
+      const tool = STATE.toolMap.get(last.toolId);
+      if (!tool) return;
+      // Pre-populate fields with saved args
+      if (last.args) {
+        Object.entries(last.args).forEach(([key, val]) => {
+          const el = DOM.runFields?.querySelector(`[name="${key}"]`);
+          if (el) {
+            if (el.type === "checkbox") el.checked = !!val;
+            else el.value = val;
+          }
+        });
+      }
+    }, 150);
   });
 
   // Tip / Support Modal Wiring
