@@ -56,3 +56,8 @@ npm start
 ## License
 
 MIT © Bayazid Habib Siddikee
+
+
+## Personal Portfolio
+
+A futuristic, interactive portfolio is available alongside Toolforge at **`/portfolio.html`** when the app is running. It organizes projects into six sector portals. See [PORTFOLIO.md](PORTFOLIO.md) for the architecture and release checklist.
