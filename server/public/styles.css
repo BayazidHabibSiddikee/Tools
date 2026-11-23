@@ -1910,3 +1910,7 @@ kbd {
   .history-row { grid-template-columns: 10px minmax(0, 1fr); }
   .history-row .tag { display: none; }
 }
+
+
+/* Personal portfolio shortcut */
+.portfolio-shortcut{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 6px 6px;padding:8px 10px;border:1px solid rgba(87,224,216,.24);border-radius:9px;color:var(--accent2);font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;transition:background .16s,border-color .16s}.portfolio-shortcut:hover{background:color-mix(in srgb,var(--accent2) 9%,transparent);border-color:var(--accent2)}
